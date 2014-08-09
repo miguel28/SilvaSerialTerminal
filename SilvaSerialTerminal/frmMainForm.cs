@@ -18,9 +18,9 @@ namespace SilvaSerialTerminal
             InitializeComponent();
             RefreshPortList();
 
-            if(cboxComPorts.Items.Count >= 0)
+            if(cboxComPorts.Items.Count > 0)
                 cboxComPorts.SelectedIndex = 0;
-            if (cboxBaudRate.Items.Count >= 0)
+            if (cboxBaudRate.Items.Count > 0)
                 cboxBaudRate.SelectedIndex = 0;
         }
 
