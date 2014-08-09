@@ -125,9 +125,9 @@ namespace SilvaSerialTerminal
             catch(Exception comException)
             {
                 MessageBox.Show("Error : " + comException.Message, "Error Device Disconnected!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
-                //Application.Exit();
-                Environment.Exit(1);
+                //Close();
+                Application.Exit();
+                //Environment.Exit(1);
             }
         }
         private void txtSendCom_KeyPress(object sender, KeyPressEventArgs e)
