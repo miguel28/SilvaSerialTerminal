@@ -13,13 +13,12 @@ namespace SilvaSerialTerminal
 {
     public partial class frmMainForm : Form
     {
+        
         public frmMainForm()
         {
             InitializeComponent();
             RefreshPortList();
 
-            if(cboxComPorts.Items.Count > 0)
-                cboxComPorts.SelectedIndex = 0;
             if (cboxBaudRate.Items.Count > 0)
                 cboxBaudRate.SelectedIndex = 0;
         }
@@ -31,8 +30,9 @@ namespace SilvaSerialTerminal
             {
                 cboxComPorts.Items.Add(port);
             }
+            if (cboxComPorts.Items.Count > 0)
+                cboxComPorts.SelectedIndex = 0;
         }
-
         private List<string> GetPortNames()
         {
             using (var searcher = new ManagementObjectSearcher("SELECT * FROM WIN32_SerialPort"))
@@ -45,12 +45,10 @@ namespace SilvaSerialTerminal
                 return tList;
             }
         }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             RefreshPortList();
         }
-
         private void txtBaudRate_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -58,30 +56,45 @@ namespace SilvaSerialTerminal
                 e.Handled = true;
             }
         }
-
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            
-            serialPort.BaudRate = GetBaudRate();
-            serialPort.PortName = GetPortName();
-            serialPort.Open();
-
-            if (serialPort.IsOpen)
+            if(serialPort.IsOpen)
             {
-                btnConnect.Text = "Disconnect!";
-                timerReader.Enabled = true;
+                serialPort.Close();
+                btnConnect.Text = "Connect!";
+                timerReader.Enabled = false;
+                EnableConnectionGUI(true);
             }
-            else
-                MessageBox.Show("Couldn't open Serial port " + serialPort.PortName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
+            else 
+            {
+                serialPort.BaudRate = GetBaudRate();
+                serialPort.PortName = GetPortName();
+                serialPort.Open();
 
+                if (serialPort.IsOpen)
+                {
+                    btnConnect.Text = "Disconnect!";
+                    timerReader.Enabled = true;
+                    EnableConnectionGUI(false);
+                }
+                else
+                    MessageBox.Show("Couldn't open Serial port " + serialPort.PortName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+        }
+        private void EnableConnectionGUI(bool en)
+        {
+            cboxBaudRate.Enabled = en;
+            cboxComPorts.Enabled = en;
+            btnRefresh.Enabled = en;
+            btnSend.Enabled = !en;
+        }
         private int GetBaudRate()
         {
             string temp = cboxBaudRate.Items[cboxBaudRate.SelectedIndex] as string;
             int ret = int.Parse(temp);
             return ret;
         }
-
         private string GetPortName()
         {
             string temp = cboxComPorts.Items[cboxComPorts.SelectedIndex] as string;
@@ -92,12 +105,35 @@ namespace SilvaSerialTerminal
         {
             
         }
-
         private void timerReader_Tick(object sender, EventArgs e)
         {
             txtReceived.Text += serialPort.ReadExisting();
             txtReceived.SelectionStart = txtReceived.TextLength;
             txtReceived.ScrollToCaret();
+        }
+        private void btnClearReceived_Click(object sender, EventArgs e)
+        {
+            txtReceived.Text = "";
+        }
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(serialPort.IsOpen)
+                    serialPort.Write(txtSendCom.Text);
+            }
+            catch(Exception comException)
+            {
+                MessageBox.Show("Error : " + comException.Message, "Error Device Disconnected!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+                //Application.Exit();
+                Environment.Exit(1);
+            }
+        }
+        private void txtSendCom_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /*if ((int)e.KeyChar == (int)Keys.Enter)
+                btnSend_Click(sender, e);*/
         }
     }
 
