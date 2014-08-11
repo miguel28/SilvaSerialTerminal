@@ -42,6 +42,25 @@ namespace SilvaSerialTerminal
                 var tList = (from n in portnames
                              join p in ports on n equals p["DeviceID"].ToString()
                              select n + " - " + p["Caption"]).ToList();
+
+                foreach(string port in portnames)
+                {
+                    bool founded = false;
+                    foreach (string iport in tList)
+                    {
+                        if (iport.Contains(port))
+                        {
+                            founded = true;
+                        }
+                    }  
+                    if(!founded)
+                    {
+                        tList.Add(port);
+                        break;
+                    }
+
+                }
+
                 return tList;
             }
         }
@@ -98,15 +117,15 @@ namespace SilvaSerialTerminal
         private string GetPortName()
         {
             string temp = cboxComPorts.Items[cboxComPorts.SelectedIndex] as string;
+            temp += ' ';
             return temp.Substring(0, temp.IndexOf(' '));
         }
 
-        private void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            
-        }
         private void timerReader_Tick(object sender, EventArgs e)
         {
+            if (txtReceived.Text.Length > 10000)
+                txtReceived.Text = txtReceived.Text.Substring(10000);
+
             txtReceived.Text += serialPort.ReadExisting();
             txtReceived.SelectionStart = txtReceived.TextLength;
             txtReceived.ScrollToCaret();

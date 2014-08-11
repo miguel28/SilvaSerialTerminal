@@ -39,19 +39,20 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.cboxComPorts = new System.Windows.Forms.ComboBox();
             this.lblComPort = new System.Windows.Forms.Label();
+            this.grpReceived = new System.Windows.Forms.GroupBox();
+            this.txtReceived = new System.Windows.Forms.TextBox();
             this.grpSend = new System.Windows.Forms.GroupBox();
+            this.btnClearReceived = new System.Windows.Forms.Button();
+            this.btnSend = new System.Windows.Forms.Button();
+            this.txtSendCom = new System.Windows.Forms.TextBox();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.timerReader = new System.Windows.Forms.Timer(this.components);
-            this.txtSendCom = new System.Windows.Forms.TextBox();
-            this.btnSend = new System.Windows.Forms.Button();
-            this.btnClearReceived = new System.Windows.Forms.Button();
-            this.txtReceived = new System.Windows.Forms.TextBox();
-            this.grpReceived = new System.Windows.Forms.GroupBox();
+            this.lblSend = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.grpComs.SuspendLayout();
-            this.grpSend.SuspendLayout();
             this.grpReceived.SuspendLayout();
+            this.grpSend.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -60,7 +61,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(605, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(714, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -82,9 +83,9 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(605, 464);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(714, 464);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // grpComs
@@ -101,7 +102,7 @@
             this.grpComs.ForeColor = System.Drawing.SystemColors.Control;
             this.grpComs.Location = new System.Drawing.Point(3, 3);
             this.grpComs.Name = "grpComs";
-            this.grpComs.Size = new System.Drawing.Size(599, 79);
+            this.grpComs.Size = new System.Drawing.Size(708, 79);
             this.grpComs.TabIndex = 0;
             this.grpComs.TabStop = false;
             this.grpComs.Text = "Serial Ports";
@@ -172,59 +173,16 @@
             this.lblComPort.TabIndex = 0;
             this.lblComPort.Text = "Com Port";
             // 
-            // grpSend
+            // grpReceived
             // 
-            this.grpSend.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.grpSend.Controls.Add(this.btnClearReceived);
-            this.grpSend.Controls.Add(this.btnSend);
-            this.grpSend.Controls.Add(this.txtSendCom);
-            this.grpSend.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpSend.Location = new System.Drawing.Point(3, 315);
-            this.grpSend.Name = "grpSend";
-            this.grpSend.Size = new System.Drawing.Size(599, 146);
-            this.grpSend.TabIndex = 2;
-            this.grpSend.TabStop = false;
-            this.grpSend.Text = "Command";
-            // 
-            // serialPort
-            // 
-            this.serialPort.ReadBufferSize = 512;
-            this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_DataReceived);
-            // 
-            // timerReader
-            // 
-            this.timerReader.Interval = 10;
-            this.timerReader.Tick += new System.EventHandler(this.timerReader_Tick);
-            // 
-            // txtSendCom
-            // 
-            this.txtSendCom.Location = new System.Drawing.Point(65, 16);
-            this.txtSendCom.Multiline = true;
-            this.txtSendCom.Name = "txtSendCom";
-            this.txtSendCom.Size = new System.Drawing.Size(310, 48);
-            this.txtSendCom.TabIndex = 0;
-            this.txtSendCom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSendCom_KeyPress);
-            // 
-            // btnSend
-            // 
-            this.btnSend.Enabled = false;
-            this.btnSend.Location = new System.Drawing.Point(381, 16);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(75, 48);
-            this.btnSend.TabIndex = 1;
-            this.btnSend.Text = "Send";
-            this.btnSend.UseVisualStyleBackColor = true;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
-            // 
-            // btnClearReceived
-            // 
-            this.btnClearReceived.Location = new System.Drawing.Point(489, 19);
-            this.btnClearReceived.Name = "btnClearReceived";
-            this.btnClearReceived.Size = new System.Drawing.Size(94, 45);
-            this.btnClearReceived.TabIndex = 2;
-            this.btnClearReceived.Text = "Clear Received";
-            this.btnClearReceived.UseVisualStyleBackColor = true;
-            this.btnClearReceived.Click += new System.EventHandler(this.btnClearReceived_Click);
+            this.grpReceived.Controls.Add(this.txtReceived);
+            this.grpReceived.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpReceived.Location = new System.Drawing.Point(3, 88);
+            this.grpReceived.Name = "grpReceived";
+            this.grpReceived.Size = new System.Drawing.Size(708, 273);
+            this.grpReceived.TabIndex = 1;
+            this.grpReceived.TabStop = false;
+            this.grpReceived.Text = "ReceivedText";
             // 
             // txtReceived
             // 
@@ -233,26 +191,79 @@
             this.txtReceived.Location = new System.Drawing.Point(3, 16);
             this.txtReceived.Multiline = true;
             this.txtReceived.Name = "txtReceived";
+            this.txtReceived.ReadOnly = true;
             this.txtReceived.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtReceived.Size = new System.Drawing.Size(593, 202);
+            this.txtReceived.Size = new System.Drawing.Size(702, 254);
             this.txtReceived.TabIndex = 0;
             // 
-            // grpReceived
+            // grpSend
             // 
-            this.grpReceived.Controls.Add(this.txtReceived);
-            this.grpReceived.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpReceived.Location = new System.Drawing.Point(3, 88);
-            this.grpReceived.Name = "grpReceived";
-            this.grpReceived.Size = new System.Drawing.Size(599, 221);
-            this.grpReceived.TabIndex = 1;
-            this.grpReceived.TabStop = false;
-            this.grpReceived.Text = "ReceivedText";
+            this.grpSend.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.grpSend.Controls.Add(this.lblSend);
+            this.grpSend.Controls.Add(this.btnClearReceived);
+            this.grpSend.Controls.Add(this.btnSend);
+            this.grpSend.Controls.Add(this.txtSendCom);
+            this.grpSend.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpSend.Location = new System.Drawing.Point(3, 367);
+            this.grpSend.Name = "grpSend";
+            this.grpSend.Size = new System.Drawing.Size(708, 94);
+            this.grpSend.TabIndex = 2;
+            this.grpSend.TabStop = false;
+            this.grpSend.Text = "Command";
+            // 
+            // btnClearReceived
+            // 
+            this.btnClearReceived.Location = new System.Drawing.Point(482, 16);
+            this.btnClearReceived.Name = "btnClearReceived";
+            this.btnClearReceived.Size = new System.Drawing.Size(94, 36);
+            this.btnClearReceived.TabIndex = 2;
+            this.btnClearReceived.Text = "Clear Received";
+            this.btnClearReceived.UseVisualStyleBackColor = true;
+            this.btnClearReceived.Click += new System.EventHandler(this.btnClearReceived_Click);
+            // 
+            // btnSend
+            // 
+            this.btnSend.Enabled = false;
+            this.btnSend.Location = new System.Drawing.Point(401, 16);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(46, 36);
+            this.btnSend.TabIndex = 1;
+            this.btnSend.Text = "Send";
+            this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            // 
+            // txtSendCom
+            // 
+            this.txtSendCom.Location = new System.Drawing.Point(98, 16);
+            this.txtSendCom.Multiline = true;
+            this.txtSendCom.Name = "txtSendCom";
+            this.txtSendCom.Size = new System.Drawing.Size(297, 36);
+            this.txtSendCom.TabIndex = 0;
+            this.txtSendCom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSendCom_KeyPress);
+            // 
+            // serialPort
+            // 
+            this.serialPort.ReadBufferSize = 512;
+            // 
+            // timerReader
+            // 
+            this.timerReader.Interval = 10;
+            this.timerReader.Tick += new System.EventHandler(this.timerReader_Tick);
+            // 
+            // lblSend
+            // 
+            this.lblSend.AutoSize = true;
+            this.lblSend.Location = new System.Drawing.Point(10, 20);
+            this.lblSend.Name = "lblSend";
+            this.lblSend.Size = new System.Drawing.Size(82, 13);
+            this.lblSend.TabIndex = 3;
+            this.lblSend.Text = "Send Command";
             // 
             // frmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 488);
+            this.ClientSize = new System.Drawing.Size(714, 488);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -263,10 +274,10 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.grpComs.ResumeLayout(false);
             this.grpComs.PerformLayout();
-            this.grpSend.ResumeLayout(false);
-            this.grpSend.PerformLayout();
             this.grpReceived.ResumeLayout(false);
             this.grpReceived.PerformLayout();
+            this.grpSend.ResumeLayout(false);
+            this.grpSend.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,6 +303,7 @@
         private System.Windows.Forms.TextBox txtSendCom;
         private System.Windows.Forms.GroupBox grpReceived;
         private System.Windows.Forms.TextBox txtReceived;
+        private System.Windows.Forms.Label lblSend;
     }
 }
 
