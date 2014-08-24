@@ -42,12 +42,15 @@
             this.grpReceived = new System.Windows.Forms.GroupBox();
             this.txtReceived = new System.Windows.Forms.TextBox();
             this.grpSend = new System.Windows.Forms.GroupBox();
+            this.lblSend = new System.Windows.Forms.Label();
             this.btnClearReceived = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtSendCom = new System.Windows.Forms.TextBox();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.timerReader = new System.Windows.Forms.Timer(this.components);
-            this.lblSend = new System.Windows.Forms.Label();
+            this.radText = new System.Windows.Forms.RadioButton();
+            this.radHexData = new System.Windows.Forms.RadioButton();
+            this.chkUse0xFF = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.grpComs.SuspendLayout();
@@ -199,6 +202,9 @@
             // grpSend
             // 
             this.grpSend.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.grpSend.Controls.Add(this.chkUse0xFF);
+            this.grpSend.Controls.Add(this.radHexData);
+            this.grpSend.Controls.Add(this.radText);
             this.grpSend.Controls.Add(this.lblSend);
             this.grpSend.Controls.Add(this.btnClearReceived);
             this.grpSend.Controls.Add(this.btnSend);
@@ -210,6 +216,15 @@
             this.grpSend.TabIndex = 2;
             this.grpSend.TabStop = false;
             this.grpSend.Text = "Command";
+            // 
+            // lblSend
+            // 
+            this.lblSend.AutoSize = true;
+            this.lblSend.Location = new System.Drawing.Point(10, 20);
+            this.lblSend.Name = "lblSend";
+            this.lblSend.Size = new System.Drawing.Size(82, 13);
+            this.lblSend.TabIndex = 3;
+            this.lblSend.Text = "Send Command";
             // 
             // btnClearReceived
             // 
@@ -247,17 +262,40 @@
             // 
             // timerReader
             // 
-            this.timerReader.Interval = 10;
+            this.timerReader.Interval = 50;
             this.timerReader.Tick += new System.EventHandler(this.timerReader_Tick);
             // 
-            // lblSend
+            // radText
             // 
-            this.lblSend.AutoSize = true;
-            this.lblSend.Location = new System.Drawing.Point(10, 20);
-            this.lblSend.Name = "lblSend";
-            this.lblSend.Size = new System.Drawing.Size(82, 13);
-            this.lblSend.TabIndex = 3;
-            this.lblSend.Text = "Send Command";
+            this.radText.AutoSize = true;
+            this.radText.Checked = true;
+            this.radText.Location = new System.Drawing.Point(26, 58);
+            this.radText.Name = "radText";
+            this.radText.Size = new System.Drawing.Size(46, 17);
+            this.radText.TabIndex = 4;
+            this.radText.TabStop = true;
+            this.radText.Text = "Text";
+            this.radText.UseVisualStyleBackColor = true;
+            // 
+            // radHexData
+            // 
+            this.radHexData.AutoSize = true;
+            this.radHexData.Location = new System.Drawing.Point(78, 58);
+            this.radHexData.Name = "radHexData";
+            this.radHexData.Size = new System.Drawing.Size(70, 17);
+            this.radHexData.TabIndex = 5;
+            this.radHexData.Text = "Hex Data";
+            this.radHexData.UseVisualStyleBackColor = true;
+            // 
+            // chkUse0xFF
+            // 
+            this.chkUse0xFF.AutoSize = true;
+            this.chkUse0xFF.Location = new System.Drawing.Point(164, 59);
+            this.chkUse0xFF.Name = "chkUse0xFF";
+            this.chkUse0xFF.Size = new System.Drawing.Size(145, 17);
+            this.chkUse0xFF.TabIndex = 6;
+            this.chkUse0xFF.Text = "Use 0xFF 0xFF New Line";
+            this.chkUse0xFF.UseVisualStyleBackColor = true;
             // 
             // frmMainForm
             // 
@@ -304,6 +342,9 @@
         private System.Windows.Forms.GroupBox grpReceived;
         private System.Windows.Forms.TextBox txtReceived;
         private System.Windows.Forms.Label lblSend;
+        private System.Windows.Forms.RadioButton radHexData;
+        private System.Windows.Forms.RadioButton radText;
+        private System.Windows.Forms.CheckBox chkUse0xFF;
     }
 }
 

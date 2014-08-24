@@ -125,8 +125,22 @@ namespace SilvaSerialTerminal
         {
             if (txtReceived.Text.Length > 10000)
                 txtReceived.Text = txtReceived.Text.Substring(10000);
+            
+            if(radText.Checked)
+            {
+                string strReceived = serialPort.ReadExisting();
+                txtReceived.Text += strReceived;
+            }
+            else if (radHexData.Checked)
+            {
+                byte[] data = new byte[serialPort.BytesToRead];
+                serialPort.Read(data, 0, data.Length);
+                string strReceived = BitConverter.ToString(data);
 
-            txtReceived.Text += serialPort.ReadExisting();
+                if (chkUse0xFF.Checked)
+                    strReceived = strReceived.Replace("FF", "\r\n");
+                txtReceived.Text += strReceived;
+            }
             txtReceived.SelectionStart = txtReceived.TextLength;
             txtReceived.ScrollToCaret();
         }
