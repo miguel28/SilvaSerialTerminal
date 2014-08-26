@@ -125,7 +125,8 @@ namespace SilvaSerialTerminal
         {
             if (txtReceived.Text.Length > 10000)
                 txtReceived.Text = txtReceived.Text.Substring(10000);
-            
+
+            txtReceived.Text += serialPort.ReadExisting();
             if(radText.Checked)
             {
                 string strReceived = serialPort.ReadExisting();

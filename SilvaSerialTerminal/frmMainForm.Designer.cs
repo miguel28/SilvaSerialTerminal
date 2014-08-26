@@ -42,15 +42,15 @@
             this.grpReceived = new System.Windows.Forms.GroupBox();
             this.txtReceived = new System.Windows.Forms.TextBox();
             this.grpSend = new System.Windows.Forms.GroupBox();
+            this.chkUse0xFF = new System.Windows.Forms.CheckBox();
+            this.radHexData = new System.Windows.Forms.RadioButton();
+            this.radText = new System.Windows.Forms.RadioButton();
             this.lblSend = new System.Windows.Forms.Label();
             this.btnClearReceived = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtSendCom = new System.Windows.Forms.TextBox();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.timerReader = new System.Windows.Forms.Timer(this.components);
-            this.radText = new System.Windows.Forms.RadioButton();
-            this.radHexData = new System.Windows.Forms.RadioButton();
-            this.chkUse0xFF = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.grpComs.SuspendLayout();
@@ -116,6 +116,8 @@
             this.cboxBaudRate.FormattingEnabled = true;
             this.cboxBaudRate.Items.AddRange(new object[] {
             "9600",
+            "4800",
+            "2400",
             "19200",
             "115200"});
             this.cboxBaudRate.Location = new System.Drawing.Point(421, 18);
@@ -217,6 +219,38 @@
             this.grpSend.TabStop = false;
             this.grpSend.Text = "Command";
             // 
+            // chkUse0xFF
+            // 
+            this.chkUse0xFF.AutoSize = true;
+            this.chkUse0xFF.Location = new System.Drawing.Point(164, 59);
+            this.chkUse0xFF.Name = "chkUse0xFF";
+            this.chkUse0xFF.Size = new System.Drawing.Size(145, 17);
+            this.chkUse0xFF.TabIndex = 6;
+            this.chkUse0xFF.Text = "Use 0xFF 0xFF New Line";
+            this.chkUse0xFF.UseVisualStyleBackColor = true;
+            // 
+            // radHexData
+            // 
+            this.radHexData.AutoSize = true;
+            this.radHexData.Location = new System.Drawing.Point(78, 58);
+            this.radHexData.Name = "radHexData";
+            this.radHexData.Size = new System.Drawing.Size(70, 17);
+            this.radHexData.TabIndex = 5;
+            this.radHexData.Text = "Hex Data";
+            this.radHexData.UseVisualStyleBackColor = true;
+            // 
+            // radText
+            // 
+            this.radText.AutoSize = true;
+            this.radText.Checked = true;
+            this.radText.Location = new System.Drawing.Point(26, 58);
+            this.radText.Name = "radText";
+            this.radText.Size = new System.Drawing.Size(46, 17);
+            this.radText.TabIndex = 4;
+            this.radText.TabStop = true;
+            this.radText.Text = "Text";
+            this.radText.UseVisualStyleBackColor = true;
+            // 
             // lblSend
             // 
             this.lblSend.AutoSize = true;
@@ -264,38 +298,6 @@
             // 
             this.timerReader.Interval = 50;
             this.timerReader.Tick += new System.EventHandler(this.timerReader_Tick);
-            // 
-            // radText
-            // 
-            this.radText.AutoSize = true;
-            this.radText.Checked = true;
-            this.radText.Location = new System.Drawing.Point(26, 58);
-            this.radText.Name = "radText";
-            this.radText.Size = new System.Drawing.Size(46, 17);
-            this.radText.TabIndex = 4;
-            this.radText.TabStop = true;
-            this.radText.Text = "Text";
-            this.radText.UseVisualStyleBackColor = true;
-            // 
-            // radHexData
-            // 
-            this.radHexData.AutoSize = true;
-            this.radHexData.Location = new System.Drawing.Point(78, 58);
-            this.radHexData.Name = "radHexData";
-            this.radHexData.Size = new System.Drawing.Size(70, 17);
-            this.radHexData.TabIndex = 5;
-            this.radHexData.Text = "Hex Data";
-            this.radHexData.UseVisualStyleBackColor = true;
-            // 
-            // chkUse0xFF
-            // 
-            this.chkUse0xFF.AutoSize = true;
-            this.chkUse0xFF.Location = new System.Drawing.Point(164, 59);
-            this.chkUse0xFF.Name = "chkUse0xFF";
-            this.chkUse0xFF.Size = new System.Drawing.Size(145, 17);
-            this.chkUse0xFF.TabIndex = 6;
-            this.chkUse0xFF.Text = "Use 0xFF 0xFF New Line";
-            this.chkUse0xFF.UseVisualStyleBackColor = true;
             // 
             // frmMainForm
             // 
