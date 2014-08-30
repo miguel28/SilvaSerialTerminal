@@ -126,7 +126,7 @@ namespace SilvaSerialTerminal
             if (txtReceived.Text.Length > 10000)
                 txtReceived.Text = txtReceived.Text.Substring(10000);
 
-            txtReceived.Text += serialPort.ReadExisting();
+            //txtReceived.Text += serialPort.ReadExisting();
             if(radText.Checked)
             {
                 string strReceived = serialPort.ReadExisting();
@@ -168,6 +168,24 @@ namespace SilvaSerialTerminal
         {
             /*if ((int)e.KeyChar == (int)Keys.Enter)
                 btnSend_Click(sender, e);*/
+        }
+
+        private void btnSendFF_Click(object sender, EventArgs e)
+        {
+            byte[] b = new byte[12];
+            b[0] = (byte)0x00;
+            b[1] = (byte)0x02;
+            b[2] = (byte)0x80;
+            b[3] = (byte)0x80;
+            b[4] = (byte)0x80;
+            b[5] = (byte)0x80;
+            b[6] = (byte)0x80;
+            b[7] = (byte)0x80;
+            b[8] = (byte)0x80;
+            b[9] = (byte)0x80;
+            b[10] = (byte)0xff;
+            b[11] = (byte)0xff;
+            serialPort.Write(b,0,12);
         }
     }
 
