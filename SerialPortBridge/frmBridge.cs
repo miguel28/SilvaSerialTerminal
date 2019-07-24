@@ -127,6 +127,7 @@ namespace SerialPortBridge
             cboxComPorts2.Enabled = en;
             btnRefresh.Enabled = en;
             btnSend.Enabled = !en;
+            btnSend2.Enabled = !en;
         }
         private int GetBaudRate()
         {
@@ -186,6 +187,11 @@ namespace SerialPortBridge
                 if (radText.Checked)
                 {
                     string text = ASCIIEncoding.Default.GetString(bytes);
+                    int index = text.IndexOf("\r");
+                    if (index >=0 && index+1 < text.Length)
+                    {
+                        text = text.Replace("\r", "\r\n");
+                    }
                     txtReceived.Text += text;
                 }
                 else if (radHexData.Checked)
@@ -201,6 +207,65 @@ namespace SerialPortBridge
                 txtReceived.ScrollToCaret();
             };
             this.Invoke(a);
+        }
+
+        private void btnClearReceived_Click(object sender, EventArgs e)
+        {
+            txtReceived.Text = "";
+        }
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort.IsOpen)
+                {
+                    if (chkNewLine.Checked)
+                    {
+                        serialPort.Write(txtSendCom.Text + "\r");
+                    }
+                    else
+                    {
+                        serialPort.Write(txtSendCom.Text);
+                    }
+
+                }
+
+            }
+            catch (Exception comException)
+            {
+                MessageBox.Show("Error : " + comException.Message, "Error Device Disconnected!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //Close();
+                Application.Exit();
+                //Environment.Exit(1);
+            }
+        }
+
+        private void Btn_Send2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPort2.IsOpen)
+                {
+                    if (chkNewLine.Checked)
+                    {
+                        serialPort2.Write(txtSendCom.Text + "\r");
+                    }
+                    else
+                    {
+                        serialPort2.Write(txtSendCom.Text);
+                    }
+
+                }
+
+            }
+            catch (Exception comException)
+            {
+                MessageBox.Show("Error : " + comException.Message, "Error Device Disconnected!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //Close();
+                Application.Exit();
+                //Environment.Exit(1);
+            }
         }
     }
 }

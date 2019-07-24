@@ -42,7 +42,6 @@
             this.grpReceived = new System.Windows.Forms.GroupBox();
             this.txtReceived = new System.Windows.Forms.TextBox();
             this.grpSend = new System.Windows.Forms.GroupBox();
-            this.btnSendFF = new System.Windows.Forms.Button();
             this.chkUse0xFF = new System.Windows.Forms.CheckBox();
             this.radHexData = new System.Windows.Forms.RadioButton();
             this.radText = new System.Windows.Forms.RadioButton();
@@ -53,6 +52,7 @@
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.timerReader = new System.Windows.Forms.Timer(this.components);
             this.chkNewLine = new System.Windows.Forms.CheckBox();
+            this.btnSendFF = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.grpComs.SuspendLayout();
@@ -223,16 +223,6 @@
             this.grpSend.TabStop = false;
             this.grpSend.Text = "Command";
             // 
-            // btnSendFF
-            // 
-            this.btnSendFF.Location = new System.Drawing.Point(401, 59);
-            this.btnSendFF.Name = "btnSendFF";
-            this.btnSendFF.Size = new System.Drawing.Size(75, 23);
-            this.btnSendFF.TabIndex = 7;
-            this.btnSendFF.Text = "button1";
-            this.btnSendFF.UseVisualStyleBackColor = true;
-            this.btnSendFF.Click += new System.EventHandler(this.btnSendFF_Click);
-            // 
             // chkUse0xFF
             // 
             this.chkUse0xFF.AutoSize = true;
@@ -320,8 +310,18 @@
             this.chkNewLine.Name = "chkNewLine";
             this.chkNewLine.Size = new System.Drawing.Size(118, 17);
             this.chkNewLine.TabIndex = 8;
-            this.chkNewLine.Text = "Use \\r \\n New Line";
+            this.chkNewLine.Text = "Use \\n \\r New Line";
             this.chkNewLine.UseVisualStyleBackColor = true;
+            // 
+            // btnSendFF
+            // 
+            this.btnSendFF.Location = new System.Drawing.Point(401, 59);
+            this.btnSendFF.Name = "btnSendFF";
+            this.btnSendFF.Size = new System.Drawing.Size(75, 23);
+            this.btnSendFF.TabIndex = 7;
+            this.btnSendFF.Text = "button1";
+            this.btnSendFF.UseVisualStyleBackColor = true;
+            this.btnSendFF.Click += new System.EventHandler(this.btnSendFF_Click);
             // 
             // frmMainForm
             // 
@@ -371,8 +371,8 @@
         private System.Windows.Forms.RadioButton radHexData;
         private System.Windows.Forms.RadioButton radText;
         private System.Windows.Forms.CheckBox chkUse0xFF;
-        private System.Windows.Forms.Button btnSendFF;
         private System.Windows.Forms.CheckBox chkNewLine;
+        private System.Windows.Forms.Button btnSendFF;
     }
 }
 

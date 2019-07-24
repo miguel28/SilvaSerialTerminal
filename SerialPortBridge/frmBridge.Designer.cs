@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.chkNewLine = new System.Windows.Forms.CheckBox();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.btnSendFF = new System.Windows.Forms.Button();
             this.chkUse0xFF = new System.Windows.Forms.CheckBox();
             this.radHexData = new System.Windows.Forms.RadioButton();
             this.radText = new System.Windows.Forms.RadioButton();
@@ -57,6 +56,7 @@
             this.cboxComPorts2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
+            this.btnSend2 = new System.Windows.Forms.Button();
             this.grpSend.SuspendLayout();
             this.grpReceived.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -78,15 +78,6 @@
             // 
             this.serialPort.ReadBufferSize = 512;
             this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_DataReceived);
-            // 
-            // btnSendFF
-            // 
-            this.btnSendFF.Location = new System.Drawing.Point(401, 59);
-            this.btnSendFF.Name = "btnSendFF";
-            this.btnSendFF.Size = new System.Drawing.Size(75, 23);
-            this.btnSendFF.TabIndex = 7;
-            this.btnSendFF.Text = "button1";
-            this.btnSendFF.UseVisualStyleBackColor = true;
             // 
             // chkUse0xFF
             // 
@@ -137,6 +128,7 @@
             this.btnClearReceived.TabIndex = 2;
             this.btnClearReceived.Text = "Clear Received";
             this.btnClearReceived.UseVisualStyleBackColor = true;
+            this.btnClearReceived.Click += new System.EventHandler(this.btnClearReceived_Click);
             // 
             // btnSend
             // 
@@ -145,8 +137,9 @@
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(46, 36);
             this.btnSend.TabIndex = 1;
-            this.btnSend.Text = "Send";
+            this.btnSend.Text = "Send1";
             this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // txtSendCom
             // 
@@ -159,8 +152,8 @@
             // grpSend
             // 
             this.grpSend.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.grpSend.Controls.Add(this.btnSend2);
             this.grpSend.Controls.Add(this.chkNewLine);
-            this.grpSend.Controls.Add(this.btnSendFF);
             this.grpSend.Controls.Add(this.chkUse0xFF);
             this.grpSend.Controls.Add(this.radHexData);
             this.grpSend.Controls.Add(this.radText);
@@ -374,6 +367,17 @@
             this.serialPort2.ReadBufferSize = 512;
             this.serialPort2.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort2_DataReceived);
             // 
+            // btnSend2
+            // 
+            this.btnSend2.Enabled = false;
+            this.btnSend2.Location = new System.Drawing.Point(401, 58);
+            this.btnSend2.Name = "btnSend2";
+            this.btnSend2.Size = new System.Drawing.Size(46, 36);
+            this.btnSend2.TabIndex = 9;
+            this.btnSend2.Text = "Send2";
+            this.btnSend2.UseVisualStyleBackColor = true;
+            this.btnSend2.Click += new System.EventHandler(this.Btn_Send2_Click);
+            // 
             // frmBridge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,7 +405,6 @@
 
         private System.Windows.Forms.CheckBox chkNewLine;
         private System.IO.Ports.SerialPort serialPort;
-        private System.Windows.Forms.Button btnSendFF;
         private System.Windows.Forms.CheckBox chkUse0xFF;
         private System.Windows.Forms.RadioButton radHexData;
         private System.Windows.Forms.RadioButton radText;
@@ -427,5 +430,6 @@
         private System.Windows.Forms.ComboBox cboxComPorts2;
         private System.Windows.Forms.Label label2;
         private System.IO.Ports.SerialPort serialPort2;
+        private System.Windows.Forms.Button btnSend2;
     }
 }
