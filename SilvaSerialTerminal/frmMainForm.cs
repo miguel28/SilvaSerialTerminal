@@ -154,7 +154,18 @@ namespace SilvaSerialTerminal
             try
             {
                 if(serialPort.IsOpen)
-                    serialPort.Write(txtSendCom.Text);
+                {
+                    if (chkNewLine.Checked)
+                    {
+                        serialPort.Write(txtSendCom.Text + "\r");
+                    }
+                    else
+                    {
+                        serialPort.Write(txtSendCom.Text);
+                    }
+                    
+                }
+                    
             }
             catch(Exception comException)
             {

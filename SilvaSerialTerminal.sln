@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilvaSerialTerminal", "SilvaSerialTerminal\SilvaSerialTerminal.csproj", "{40C94ACA-390D-45AD-B562-03F2DE6A1333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialPortBridge", "SerialPortBridge\SerialPortBridge.csproj", "{8A798225-A6C3-4D31-899F-E228D499B026}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{40C94ACA-390D-45AD-B562-03F2DE6A1333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40C94ACA-390D-45AD-B562-03F2DE6A1333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40C94ACA-390D-45AD-B562-03F2DE6A1333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A798225-A6C3-4D31-899F-E228D499B026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A798225-A6C3-4D31-899F-E228D499B026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A798225-A6C3-4D31-899F-E228D499B026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A798225-A6C3-4D31-899F-E228D499B026}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F65133F5-4464-44A4-ACE5-964E60CAAC79}
 	EndGlobalSection
 EndGlobal
