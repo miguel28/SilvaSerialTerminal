@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.grpComs = new System.Windows.Forms.GroupBox();
             this.cboxBaudRate = new System.Windows.Forms.ComboBox();
             this.lblBaudRate = new System.Windows.Forms.Label();
@@ -42,6 +42,8 @@
             this.grpReceived = new System.Windows.Forms.GroupBox();
             this.txtReceived = new System.Windows.Forms.TextBox();
             this.grpSend = new System.Windows.Forms.GroupBox();
+            this.chkNewLine = new System.Windows.Forms.CheckBox();
+            this.btnSendFF = new System.Windows.Forms.Button();
             this.chkUse0xFF = new System.Windows.Forms.CheckBox();
             this.radHexData = new System.Windows.Forms.RadioButton();
             this.radText = new System.Windows.Forms.RadioButton();
@@ -49,15 +51,20 @@
             this.btnClearReceived = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
             this.txtSendCom = new System.Windows.Forms.TextBox();
+            this.grpAutoResponse = new System.Windows.Forms.GroupBox();
+            this.numTimeout = new System.Windows.Forms.NumericUpDown();
+            this.lblAutoResponse = new System.Windows.Forms.Label();
+            this.txtAutoResponse = new System.Windows.Forms.TextBox();
+            this.chkEnableAutoResponse = new System.Windows.Forms.CheckBox();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.timerReader = new System.Windows.Forms.Timer(this.components);
-            this.chkNewLine = new System.Windows.Forms.CheckBox();
-            this.btnSendFF = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tlpMain.SuspendLayout();
             this.grpComs.SuspendLayout();
             this.grpReceived.SuspendLayout();
             this.grpSend.SuspendLayout();
+            this.grpAutoResponse.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -76,22 +83,24 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // tableLayoutPanel1
+            // tlpMain
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.grpComs, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.grpReceived, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.grpSend, 0, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(714, 464);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.tlpMain.ColumnCount = 1;
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMain.Controls.Add(this.grpComs, 0, 0);
+            this.tlpMain.Controls.Add(this.grpReceived, 0, 1);
+            this.tlpMain.Controls.Add(this.grpSend, 0, 2);
+            this.tlpMain.Controls.Add(this.grpAutoResponse, 0, 3);
+            this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpMain.Location = new System.Drawing.Point(0, 24);
+            this.tlpMain.Name = "tlpMain";
+            this.tlpMain.RowCount = 4;
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlpMain.Size = new System.Drawing.Size(714, 526);
+            this.tlpMain.TabIndex = 1;
             // 
             // grpComs
             // 
@@ -186,7 +195,7 @@
             this.grpReceived.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpReceived.Location = new System.Drawing.Point(3, 88);
             this.grpReceived.Name = "grpReceived";
-            this.grpReceived.Size = new System.Drawing.Size(708, 273);
+            this.grpReceived.Size = new System.Drawing.Size(708, 235);
             this.grpReceived.TabIndex = 1;
             this.grpReceived.TabStop = false;
             this.grpReceived.Text = "ReceivedText";
@@ -200,7 +209,7 @@
             this.txtReceived.Name = "txtReceived";
             this.txtReceived.ReadOnly = true;
             this.txtReceived.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtReceived.Size = new System.Drawing.Size(702, 254);
+            this.txtReceived.Size = new System.Drawing.Size(702, 216);
             this.txtReceived.TabIndex = 0;
             // 
             // grpSend
@@ -216,12 +225,32 @@
             this.grpSend.Controls.Add(this.btnSend);
             this.grpSend.Controls.Add(this.txtSendCom);
             this.grpSend.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpSend.Location = new System.Drawing.Point(3, 367);
+            this.grpSend.Location = new System.Drawing.Point(3, 329);
             this.grpSend.Name = "grpSend";
             this.grpSend.Size = new System.Drawing.Size(708, 94);
             this.grpSend.TabIndex = 2;
             this.grpSend.TabStop = false;
             this.grpSend.Text = "Command";
+            // 
+            // chkNewLine
+            // 
+            this.chkNewLine.AutoSize = true;
+            this.chkNewLine.Location = new System.Drawing.Point(164, 77);
+            this.chkNewLine.Name = "chkNewLine";
+            this.chkNewLine.Size = new System.Drawing.Size(118, 17);
+            this.chkNewLine.TabIndex = 8;
+            this.chkNewLine.Text = "Use \\n \\r New Line";
+            this.chkNewLine.UseVisualStyleBackColor = true;
+            // 
+            // btnSendFF
+            // 
+            this.btnSendFF.Location = new System.Drawing.Point(401, 59);
+            this.btnSendFF.Name = "btnSendFF";
+            this.btnSendFF.Size = new System.Drawing.Size(62, 29);
+            this.btnSendFF.TabIndex = 7;
+            this.btnSendFF.Text = "Send FF";
+            this.btnSendFF.UseVisualStyleBackColor = true;
+            this.btnSendFF.Click += new System.EventHandler(this.btnSendFF_Click);
             // 
             // chkUse0xFF
             // 
@@ -279,7 +308,7 @@
             this.btnSend.Enabled = false;
             this.btnSend.Location = new System.Drawing.Point(401, 16);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(46, 36);
+            this.btnSend.Size = new System.Drawing.Size(62, 36);
             this.btnSend.TabIndex = 1;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
@@ -294,54 +323,102 @@
             this.txtSendCom.TabIndex = 0;
             this.txtSendCom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSendCom_KeyPress);
             // 
+            // grpAutoResponse
+            // 
+            this.grpAutoResponse.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.grpAutoResponse.Controls.Add(this.numTimeout);
+            this.grpAutoResponse.Controls.Add(this.lblAutoResponse);
+            this.grpAutoResponse.Controls.Add(this.txtAutoResponse);
+            this.grpAutoResponse.Controls.Add(this.chkEnableAutoResponse);
+            this.grpAutoResponse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpAutoResponse.Location = new System.Drawing.Point(3, 429);
+            this.grpAutoResponse.Name = "grpAutoResponse";
+            this.grpAutoResponse.Size = new System.Drawing.Size(708, 94);
+            this.grpAutoResponse.TabIndex = 3;
+            this.grpAutoResponse.TabStop = false;
+            this.grpAutoResponse.Text = "Auto Response";
+            // 
+            // numTimeout
+            // 
+            this.numTimeout.Location = new System.Drawing.Point(456, 32);
+            this.numTimeout.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numTimeout.Minimum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.numTimeout.Name = "numTimeout";
+            this.numTimeout.Size = new System.Drawing.Size(120, 20);
+            this.numTimeout.TabIndex = 6;
+            this.numTimeout.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // lblAutoResponse
+            // 
+            this.lblAutoResponse.AutoSize = true;
+            this.lblAutoResponse.Location = new System.Drawing.Point(10, 39);
+            this.lblAutoResponse.Name = "lblAutoResponse";
+            this.lblAutoResponse.Size = new System.Drawing.Size(82, 13);
+            this.lblAutoResponse.TabIndex = 5;
+            this.lblAutoResponse.Text = "Send Command";
+            // 
+            // txtAutoResponse
+            // 
+            this.txtAutoResponse.Location = new System.Drawing.Point(98, 35);
+            this.txtAutoResponse.Multiline = true;
+            this.txtAutoResponse.Name = "txtAutoResponse";
+            this.txtAutoResponse.Size = new System.Drawing.Size(297, 36);
+            this.txtAutoResponse.TabIndex = 4;
+            // 
+            // chkEnableAutoResponse
+            // 
+            this.chkEnableAutoResponse.AutoSize = true;
+            this.chkEnableAutoResponse.Location = new System.Drawing.Point(26, 19);
+            this.chkEnableAutoResponse.Name = "chkEnableAutoResponse";
+            this.chkEnableAutoResponse.Size = new System.Drawing.Size(59, 17);
+            this.chkEnableAutoResponse.TabIndex = 0;
+            this.chkEnableAutoResponse.Text = "Enable";
+            this.chkEnableAutoResponse.UseVisualStyleBackColor = true;
+            // 
             // serialPort
             // 
             this.serialPort.ReadBufferSize = 512;
+            this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_DataReceived);
             // 
             // timerReader
             // 
             this.timerReader.Interval = 50;
             this.timerReader.Tick += new System.EventHandler(this.timerReader_Tick);
             // 
-            // chkNewLine
-            // 
-            this.chkNewLine.AutoSize = true;
-            this.chkNewLine.Location = new System.Drawing.Point(164, 77);
-            this.chkNewLine.Name = "chkNewLine";
-            this.chkNewLine.Size = new System.Drawing.Size(118, 17);
-            this.chkNewLine.TabIndex = 8;
-            this.chkNewLine.Text = "Use \\n \\r New Line";
-            this.chkNewLine.UseVisualStyleBackColor = true;
-            // 
-            // btnSendFF
-            // 
-            this.btnSendFF.Location = new System.Drawing.Point(401, 59);
-            this.btnSendFF.Name = "btnSendFF";
-            this.btnSendFF.Size = new System.Drawing.Size(75, 23);
-            this.btnSendFF.TabIndex = 7;
-            this.btnSendFF.Text = "button1";
-            this.btnSendFF.UseVisualStyleBackColor = true;
-            this.btnSendFF.Click += new System.EventHandler(this.btnSendFF_Click);
-            // 
             // frmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 488);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(714, 550);
+            this.Controls.Add(this.tlpMain);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMainForm";
             this.Text = "Silva Serial Terminal";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tlpMain.ResumeLayout(false);
             this.grpComs.ResumeLayout(false);
             this.grpComs.PerformLayout();
             this.grpReceived.ResumeLayout(false);
             this.grpReceived.PerformLayout();
             this.grpSend.ResumeLayout(false);
             this.grpSend.PerformLayout();
+            this.grpAutoResponse.ResumeLayout(false);
+            this.grpAutoResponse.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,7 +428,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tlpMain;
         private System.Windows.Forms.GroupBox grpComs;
         private System.Windows.Forms.Label lblBaudRate;
         private System.Windows.Forms.Button btnConnect;
@@ -373,6 +450,11 @@
         private System.Windows.Forms.CheckBox chkUse0xFF;
         private System.Windows.Forms.CheckBox chkNewLine;
         private System.Windows.Forms.Button btnSendFF;
+        private System.Windows.Forms.GroupBox grpAutoResponse;
+        private System.Windows.Forms.Label lblAutoResponse;
+        private System.Windows.Forms.TextBox txtAutoResponse;
+        private System.Windows.Forms.CheckBox chkEnableAutoResponse;
+        private System.Windows.Forms.NumericUpDown numTimeout;
     }
 }
 

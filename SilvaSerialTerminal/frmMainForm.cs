@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
 using System.IO.Ports;   
@@ -81,7 +83,7 @@ namespace SilvaSerialTerminal
             {
                 serialPort.Close();
                 btnConnect.Text = "Connect!";
-                timerReader.Enabled = false;
+                //timerReader.Enabled = false;
                 EnableConnectionGUI(true);
             }
             else 
@@ -93,7 +95,7 @@ namespace SilvaSerialTerminal
                 if (serialPort.IsOpen)
                 {
                     btnConnect.Text = "Disconnect!";
-                    timerReader.Enabled = true;
+                    //timerReader.Enabled = true;
                     EnableConnectionGUI(false);
                 }
                 else
@@ -123,28 +125,9 @@ namespace SilvaSerialTerminal
 
         private void timerReader_Tick(object sender, EventArgs e)
         {
-            if (txtReceived.Text.Length > 10000)
-                txtReceived.Text = txtReceived.Text.Substring(10000);
-
-            //txtReceived.Text += serialPort.ReadExisting();
-            if(radText.Checked)
-            {
-                string strReceived = serialPort.ReadExisting();
-                txtReceived.Text += strReceived;
-            }
-            else if (radHexData.Checked)
-            {
-                byte[] data = new byte[serialPort.BytesToRead];
-                serialPort.Read(data, 0, data.Length);
-                string strReceived = BitConverter.ToString(data);
-
-                if (chkUse0xFF.Checked)
-                    strReceived = strReceived.Replace("FF", "\r\n");
-                txtReceived.Text += strReceived;
-            }
-            txtReceived.SelectionStart = txtReceived.TextLength;
-            txtReceived.ScrollToCaret();
+            ProcessIncommingData();
         }
+
         private void btnClearReceived_Click(object sender, EventArgs e)
         {
             txtReceived.Text = "";
@@ -198,6 +181,67 @@ namespace SilvaSerialTerminal
             b[11] = (byte)0xff;
             serialPort.Write(b,0,12);
         }
+
+        private void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            Action a = () => ProcessIncommingData();
+            this.Invoke(a);
+        }
+
+        private void ProcessIncommingData()
+        {
+            if (txtReceived.Text.Length > 10000)
+                txtReceived.Text = txtReceived.Text.Substring(10000);
+
+            if (radText.Checked)
+            {
+                string strReceived = serialPort.ReadExisting();
+                txtReceived.Text += strReceived;
+            }
+            else if (radHexData.Checked)
+            {
+                byte[] data = new byte[serialPort.BytesToRead];
+                serialPort.Read(data, 0, data.Length);
+                string strReceived = BitConverter.ToString(data);
+
+                if (chkUse0xFF.Checked)
+                    strReceived = strReceived.Replace("FF", "\r\n");
+                txtReceived.Text += strReceived;
+            }
+            txtReceived.SelectionStart = txtReceived.TextLength;
+            txtReceived.ScrollToCaret();
+
+            if (chkEnableAutoResponse.Checked && !string.IsNullOrEmpty(txtAutoResponse.Text))
+            {
+                Task.Delay((int)numTimeout.Value).ContinueWith(t => SendAutoResponse());
+            }
+        }
+
+        private void SendAutoResponse()
+        {
+            try
+            {
+                if (serialPort.IsOpen)
+                {
+                    if (chkNewLine.Checked)
+                    {
+                        serialPort.Write(txtAutoResponse.Text + "\r");
+                    }
+                    else
+                    {
+                        serialPort.Write(txtAutoResponse.Text);
+                    }
+                }
+            }
+            catch (Exception comException)
+            {
+                MessageBox.Show("Error : " + comException.Message, "Error Device Disconnected!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //Close();
+                Application.Exit();
+                //Environment.Exit(1);
+            }
+        }
+
     }
 
 }
