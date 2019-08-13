@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using IPCLib;
 
 namespace SilvaTCPTerminal
@@ -18,6 +19,7 @@ namespace SilvaTCPTerminal
         public frmTCPTerminal()
         {
             InitializeComponent();
+            CreateContextMenus();
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
@@ -131,6 +133,7 @@ namespace SilvaTCPTerminal
             {
                 string strReceived = ASCIIEncoding.Default.GetString(msg);
                 txtReceived.Text += strReceived;
+                CheckForAutoResponsesGrid(strReceived);
             }
             else if (radHexData.Checked)
             {
@@ -174,5 +177,102 @@ namespace SilvaTCPTerminal
             }
         }
 
+        private void CheckForAutoResponsesGrid(string input)
+        {
+            for(int i = 0; i < dgvResponses.RowCount; i++)
+            {
+                if (dgvResponses.Rows[i].IsNewRow)
+                    continue;
+
+                string expected = dgvResponses.Rows[i].Cells[0].Value as string;
+                bool enabled = (bool)dgvResponses.Rows[i].Cells[1].Value;
+                if (!string.IsNullOrEmpty(expected) && enabled)
+                {
+                    if (input.Contains(expected))
+                    {
+                        string response = dgvResponses.Rows[i].Cells[2].Value as string;
+                        if (!string.IsNullOrEmpty(response))
+                        {
+                            if (chkNewLine.Checked)
+                            {
+                                m_server.SendMessageToAllClients(response + "\r");
+                            }
+                            else
+                            {
+                                m_server.SendMessageToAllClients(response);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private ContextMenu menu = new ContextMenu();
+        private void CreateContextMenus()
+        {
+            menu.MenuItems.Add("Load", LoadResponses);
+            menu.MenuItems.Add("Save", SaveResponses);
+        }
+
+        private void LoadResponses(object sender, EventArgs args)
+        {
+            OpenFileDialog dia = new OpenFileDialog();
+            dia.Filter = "(*.txt)|*.txt";
+            DialogResult result = dia.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+
+                dgvResponses.Rows.Clear();
+                string[] lines = File.ReadAllLines(dia.FileName);
+
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string[] data = lines[i].Split(',');
+                    dgvResponses.Rows.Add(new object[] { data[0], data[1].ToLower().Contains("true"), data[2] });
+                }
+            }
+        }
+
+        private void SaveResponses(object sender, EventArgs args)
+        {
+            SaveFileDialog dia = new SaveFileDialog();
+            dia.Filter = "(*.txt)|*.txt";
+            DialogResult result = dia.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if (File.Exists(dia.FileName))
+                    File.Delete(dia.FileName);
+
+                using (FileStream fs = new FileStream(dia.FileName,FileMode.Create))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs))
+                    {
+                        for (int i = 0; i < dgvResponses.RowCount; i++)
+                        {
+                            if (dgvResponses.Rows[i].IsNewRow)
+                                continue;
+                            string data = string.Format("{0},{1},{2}",
+                                dgvResponses.Rows[i].Cells[0].Value as String,
+                                (dgvResponses.Rows[i].Cells[1].Value).ToString(),
+                                dgvResponses.Rows[i].Cells[2].Value as String
+                                );
+                            sw.WriteLine(data);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void dgvResponses_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                menu.Show(dgvResponses, e.Location);
+        }
+
+        private void dgvResponses_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                menu.Show(dgvResponses, e.Location);
+        }
     }
 }

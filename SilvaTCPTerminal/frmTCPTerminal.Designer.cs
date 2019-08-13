@@ -46,17 +46,27 @@
             this.txtReceived = new System.Windows.Forms.TextBox();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.grpComs = new System.Windows.Forms.GroupBox();
+            this.numPort = new System.Windows.Forms.NumericUpDown();
             this.lblPortListen = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
             this.grpReceived = new System.Windows.Forms.GroupBox();
-            this.numPort = new System.Windows.Forms.NumericUpDown();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.dgvResponses = new System.Windows.Forms.DataGridView();
+            this.cExpected = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cResponseEn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cResponse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).BeginInit();
             this.grpAutoResponse.SuspendLayout();
             this.grpSend.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.grpComs.SuspendLayout();
-            this.grpReceived.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
+            this.grpReceived.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResponses)).BeginInit();
             this.SuspendLayout();
             // 
             // numTimeout
@@ -116,9 +126,9 @@
             this.grpAutoResponse.Controls.Add(this.txtAutoResponse);
             this.grpAutoResponse.Controls.Add(this.chkEnableAutoResponse);
             this.grpAutoResponse.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpAutoResponse.Location = new System.Drawing.Point(3, 456);
+            this.grpAutoResponse.Location = new System.Drawing.Point(3, 464);
             this.grpAutoResponse.Name = "grpAutoResponse";
-            this.grpAutoResponse.Size = new System.Drawing.Size(768, 94);
+            this.grpAutoResponse.Size = new System.Drawing.Size(665, 94);
             this.grpAutoResponse.TabIndex = 3;
             this.grpAutoResponse.TabStop = false;
             this.grpAutoResponse.Text = "Auto Response";
@@ -146,9 +156,9 @@
             this.grpSend.Controls.Add(this.btnSend);
             this.grpSend.Controls.Add(this.txtSendCom);
             this.grpSend.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpSend.Location = new System.Drawing.Point(3, 356);
+            this.grpSend.Location = new System.Drawing.Point(3, 364);
             this.grpSend.Name = "grpSend";
-            this.grpSend.Size = new System.Drawing.Size(768, 94);
+            this.grpSend.Size = new System.Drawing.Size(665, 94);
             this.grpSend.TabIndex = 2;
             this.grpSend.TabStop = false;
             this.grpSend.Text = "Command";
@@ -242,7 +252,7 @@
             this.txtReceived.Name = "txtReceived";
             this.txtReceived.ReadOnly = true;
             this.txtReceived.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtReceived.Size = new System.Drawing.Size(762, 258);
+            this.txtReceived.Size = new System.Drawing.Size(659, 266);
             this.txtReceived.TabIndex = 0;
             // 
             // tlpMain
@@ -261,7 +271,7 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tlpMain.Size = new System.Drawing.Size(774, 553);
+            this.tlpMain.Size = new System.Drawing.Size(671, 561);
             this.tlpMain.TabIndex = 3;
             // 
             // grpComs
@@ -275,10 +285,32 @@
             this.grpComs.ForeColor = System.Drawing.SystemColors.Control;
             this.grpComs.Location = new System.Drawing.Point(3, 3);
             this.grpComs.Name = "grpComs";
-            this.grpComs.Size = new System.Drawing.Size(768, 64);
+            this.grpComs.Size = new System.Drawing.Size(665, 64);
             this.grpComs.TabIndex = 0;
             this.grpComs.TabStop = false;
             this.grpComs.Text = "Serial Ports";
+            // 
+            // numPort
+            // 
+            this.numPort.Location = new System.Drawing.Point(68, 24);
+            this.numPort.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numPort.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numPort.Name = "numPort";
+            this.numPort.Size = new System.Drawing.Size(80, 20);
+            this.numPort.TabIndex = 6;
+            this.numPort.Value = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
             // 
             // lblPortListen
             // 
@@ -308,39 +340,68 @@
             this.grpReceived.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpReceived.Location = new System.Drawing.Point(3, 73);
             this.grpReceived.Name = "grpReceived";
-            this.grpReceived.Size = new System.Drawing.Size(768, 277);
+            this.grpReceived.Size = new System.Drawing.Size(665, 285);
             this.grpReceived.TabIndex = 1;
             this.grpReceived.TabStop = false;
             this.grpReceived.Text = "ReceivedText";
             // 
-            // numPort
+            // splitContainer1
             // 
-            this.numPort.Location = new System.Drawing.Point(68, 24);
-            this.numPort.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numPort.Minimum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numPort.Name = "numPort";
-            this.numPort.Size = new System.Drawing.Size(80, 20);
-            this.numPort.TabIndex = 6;
-            this.numPort.Value = new decimal(new int[] {
-            23,
-            0,
-            0,
-            0});
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.tlpMain);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.splitContainer1.Panel2.Controls.Add(this.dgvResponses);
+            this.splitContainer1.Size = new System.Drawing.Size(1184, 561);
+            this.splitContainer1.SplitterDistance = 671;
+            this.splitContainer1.TabIndex = 4;
+            // 
+            // dgvResponses
+            // 
+            this.dgvResponses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResponses.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cExpected,
+            this.cResponseEn,
+            this.cResponse});
+            this.dgvResponses.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvResponses.Location = new System.Drawing.Point(0, 0);
+            this.dgvResponses.Name = "dgvResponses";
+            this.dgvResponses.Size = new System.Drawing.Size(509, 561);
+            this.dgvResponses.TabIndex = 0;
+            this.dgvResponses.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvResponses_CellMouseClick);
+            this.dgvResponses.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvResponses_MouseClick);
+            // 
+            // cExpected
+            // 
+            this.cExpected.HeaderText = "Expected";
+            this.cExpected.Name = "cExpected";
+            this.cExpected.Width = 200;
+            // 
+            // cResponseEn
+            // 
+            this.cResponseEn.HeaderText = "Enable Response";
+            this.cResponseEn.Name = "cResponseEn";
+            this.cResponseEn.Width = 50;
+            // 
+            // cResponse
+            // 
+            this.cResponse.HeaderText = "Response";
+            this.cResponse.Name = "cResponse";
+            this.cResponse.Width = 200;
             // 
             // frmTCPTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 553);
-            this.Controls.Add(this.tlpMain);
+            this.ClientSize = new System.Drawing.Size(1184, 561);
+            this.Controls.Add(this.splitContainer1);
             this.Name = "frmTCPTerminal";
             this.Text = "Silva TCP Terminal";
             ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).EndInit();
@@ -351,9 +412,14 @@
             this.tlpMain.ResumeLayout(false);
             this.grpComs.ResumeLayout(false);
             this.grpComs.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.grpReceived.ResumeLayout(false);
             this.grpReceived.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResponses)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -381,6 +447,11 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.GroupBox grpReceived;
         private System.Windows.Forms.NumericUpDown numPort;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.DataGridView dgvResponses;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cExpected;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn cResponseEn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cResponse;
     }
 }
 
