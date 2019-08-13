@@ -202,6 +202,7 @@ namespace SilvaTCPTerminal
                                 m_server.SendMessageToAllClients(response);
                             }
                         }
+                        break;
                     }
                 }
             }
