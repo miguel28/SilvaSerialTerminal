@@ -15,6 +15,7 @@ namespace SilvaTCPTerminal
     public partial class frmTCPTerminal : Form
     {
         private TCPServer m_server;
+        private TCPClient m_client;
 
         public frmTCPTerminal()
         {
@@ -49,7 +50,6 @@ namespace SilvaTCPTerminal
                 }
                 
             }
-
         }
 
         private void M_server_ClientDisconnected(TCPClient client)
@@ -95,6 +95,22 @@ namespace SilvaTCPTerminal
                     {
                         m_server.SendMessageToAllClients(txtSendCom.Text);
                     }
+                }
+
+                if (m_client != null && m_client.IsRunning)
+                {
+                    byte[] data = null;
+                    if (chkNewLine.Checked)
+                    {
+                        string d = "\x13" + txtSendCom.Text + "\n\x11";
+                        data = ASCIIEncoding.Default.GetBytes(d);
+                    }
+                    else
+                    {
+                        string d = txtSendCom.Text;
+                        data = ASCIIEncoding.Default.GetBytes(d);
+                    }
+                    m_client.SendMessage(data);
                 }
             }
             catch (Exception comException)
@@ -274,6 +290,59 @@ namespace SilvaTCPTerminal
         {
             if (e.Button == MouseButtons.Right)
                 menu.Show(dgvResponses, e.Location);
+        }
+
+        private void btnConnectRemote_Click(object sender, EventArgs e)
+        {
+            if (m_client != null)
+            {
+                m_client.Stop();
+                m_client = null;
+                btnConnectRemote.Text = "Connect!";
+                EnableConnectionGUI(true);
+            }
+            else
+            {
+                try
+                {
+                    m_client = TCPClient.CreateApplicationClient(txtRemoteHost.Text, (int)numPort.Value);
+                   
+                    m_client.MessageReceived += M_server_MessageReceived;
+                    m_client.Connected += M_client_Connected;
+                    m_client.Disconnected += M_client_Disconnected;
+                    m_client.Start();
+
+                    btnConnectRemote.Text = "Disconnect!";
+                    EnableConnectionGUI(false);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Couldn't create tcp server: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
+
+        private void M_client_Disconnected(object sender, EventArgs e)
+        {
+            Action a = () => txtReceived.AppendText("Disconnected Client " +  "\r\n");
+            this.Invoke(a);
+
+        }
+
+        private void M_client_Connected(object sender, EventArgs e)
+        {
+            Action a = () => txtReceived.AppendText("Connected Client " +"\r\n");
+            this.Invoke(a);
+        }
+
+        private void frmTCPTerminal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (m_server != null)
+                m_server.StopServer();
+
+            if (m_client != null)
+                m_client.Stop();
         }
     }
 }

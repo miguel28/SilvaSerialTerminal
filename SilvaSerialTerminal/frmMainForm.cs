@@ -90,6 +90,8 @@ namespace SilvaSerialTerminal
             {
                 serialPort.BaudRate = GetBaudRate();
                 serialPort.PortName = GetPortName();
+                serialPort.Handshake = Handshake.XOnXOff;
+
                 serialPort.Open();
 
                 if (serialPort.IsOpen)
@@ -140,7 +142,7 @@ namespace SilvaSerialTerminal
                 {
                     if (chkNewLine.Checked)
                     {
-                        serialPort.Write(txtSendCom.Text + "\r");
+                        serialPort.Write("\x13\x11" + txtSendCom.Text + "\n");
                     }
                     else
                     {

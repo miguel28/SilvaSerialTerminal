@@ -55,6 +55,8 @@
             this.cExpected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cResponseEn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cResponse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtRemoteHost = new System.Windows.Forms.TextBox();
+            this.btnConnectRemote = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).BeginInit();
             this.grpAutoResponse.SuspendLayout();
             this.grpSend.SuspendLayout();
@@ -277,6 +279,8 @@
             // grpComs
             // 
             this.grpComs.BackColor = System.Drawing.SystemColors.Desktop;
+            this.grpComs.Controls.Add(this.btnConnectRemote);
+            this.grpComs.Controls.Add(this.txtRemoteHost);
             this.grpComs.Controls.Add(this.numPort);
             this.grpComs.Controls.Add(this.lblPortListen);
             this.grpComs.Controls.Add(this.btnConnect);
@@ -396,6 +400,25 @@
             this.cResponse.Name = "cResponse";
             this.cResponse.Width = 200;
             // 
+            // txtRemoteHost
+            // 
+            this.txtRemoteHost.Location = new System.Drawing.Point(316, 20);
+            this.txtRemoteHost.Name = "txtRemoteHost";
+            this.txtRemoteHost.Size = new System.Drawing.Size(100, 20);
+            this.txtRemoteHost.TabIndex = 7;
+            this.txtRemoteHost.Text = "192.168.1.7";
+            // 
+            // btnConnectRemote
+            // 
+            this.btnConnectRemote.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnConnectRemote.Location = new System.Drawing.Point(422, 20);
+            this.btnConnectRemote.Name = "btnConnectRemote";
+            this.btnConnectRemote.Size = new System.Drawing.Size(97, 23);
+            this.btnConnectRemote.TabIndex = 8;
+            this.btnConnectRemote.Text = "Connect!";
+            this.btnConnectRemote.UseVisualStyleBackColor = true;
+            this.btnConnectRemote.Click += new System.EventHandler(this.btnConnectRemote_Click);
+            // 
             // frmTCPTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -404,6 +427,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmTCPTerminal";
             this.Text = "Silva TCP Terminal";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTCPTerminal_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).EndInit();
             this.grpAutoResponse.ResumeLayout(false);
             this.grpAutoResponse.PerformLayout();
@@ -452,6 +476,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cExpected;
         private System.Windows.Forms.DataGridViewCheckBoxColumn cResponseEn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cResponse;
+        private System.Windows.Forms.Button btnConnectRemote;
+        private System.Windows.Forms.TextBox txtRemoteHost;
     }
 }
 
