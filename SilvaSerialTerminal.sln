@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialPortBridge", "SerialP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilvaTCPTerminal", "SilvaTCPTerminal\SilvaTCPTerminal.csproj", "{EEA5EB65-F09D-446E-9842-93C24979F0BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLXTerminal", "CLXTerminal\CLXTerminal.csproj", "{BE581434-2A89-4D9C-BA22-4ADEC559E670}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EEA5EB65-F09D-446E-9842-93C24979F0BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEA5EB65-F09D-446E-9842-93C24979F0BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEA5EB65-F09D-446E-9842-93C24979F0BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE581434-2A89-4D9C-BA22-4ADEC559E670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE581434-2A89-4D9C-BA22-4ADEC559E670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE581434-2A89-4D9C-BA22-4ADEC559E670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE581434-2A89-4D9C-BA22-4ADEC559E670}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
