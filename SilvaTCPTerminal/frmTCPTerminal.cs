@@ -183,6 +183,22 @@ namespace SilvaTCPTerminal
                         m_server.SendMessageToAllClients(txtAutoResponse.Text);
                     }
                 }
+
+                if (m_client != null && m_client.IsRunning)
+                {
+                    byte[] d;
+                    if (chkNewLine.Checked)
+                    {
+                        d = ASCIIEncoding.Default.GetBytes(txtAutoResponse.Text + "\r");
+                        m_client.SendMessage(d);
+                    }
+                    else
+                    {
+                        d = ASCIIEncoding.Default.GetBytes(txtAutoResponse.Text);
+                        m_client.SendMessage(d);
+                    }
+                }
+
             }
             catch (Exception comException)
             {
