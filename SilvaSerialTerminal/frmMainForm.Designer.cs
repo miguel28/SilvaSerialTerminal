@@ -130,6 +130,7 @@
             "4800",
             "2400",
             "19200",
+            "38400",
             "115200"});
             this.cboxBaudRate.Location = new System.Drawing.Point(421, 18);
             this.cboxBaudRate.Name = "cboxBaudRate";
@@ -244,7 +245,7 @@
             // 
             // btnSendFF
             // 
-            this.btnSendFF.Location = new System.Drawing.Point(401, 59);
+            this.btnSendFF.Location = new System.Drawing.Point(482, 59);
             this.btnSendFF.Name = "btnSendFF";
             this.btnSendFF.Size = new System.Drawing.Size(62, 29);
             this.btnSendFF.TabIndex = 7;

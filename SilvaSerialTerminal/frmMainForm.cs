@@ -58,7 +58,7 @@ namespace SilvaSerialTerminal
                     if(!founded)
                     {
                         tList.Add(port);
-                        break;
+                        continue;
                     }
 
                 }
@@ -90,7 +90,7 @@ namespace SilvaSerialTerminal
             {
                 serialPort.BaudRate = GetBaudRate();
                 serialPort.PortName = GetPortName();
-                serialPort.Handshake = Handshake.XOnXOff;
+                serialPort.Handshake = Handshake.None;
 
                 serialPort.Open();
 
@@ -142,11 +142,28 @@ namespace SilvaSerialTerminal
                 {
                     if (chkNewLine.Checked)
                     {
-                        serialPort.Write("\x13\x11" + txtSendCom.Text + "\n");
+                        string dd = txtSendCom.Text + "\x0d";
+                        serialPort.Write(dd);
                     }
                     else
                     {
-                        serialPort.Write(txtSendCom.Text);
+                        if (radHexData.Checked)
+                        {
+                            string[] splited = txtSendCom.Text.Split('-');
+                            byte[] data = new byte[splited.Length];
+                            if (data.Length > 0)
+                            {
+                                for(int i = 0; i < data.Length; i++)
+                                {
+                                    data[i] = (byte)Convert.ToInt32(splited[i], 16);
+                                }
+                                serialPort.Write(data, 0, data.Length);
+                            }
+                        }
+                        else
+                        {
+                            serialPort.Write(txtSendCom.Text);
+                        }
                     }
                     
                 }

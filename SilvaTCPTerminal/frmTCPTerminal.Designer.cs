@@ -46,6 +46,8 @@
             this.txtReceived = new System.Windows.Forms.TextBox();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.grpComs = new System.Windows.Forms.GroupBox();
+            this.btnConnectRemote = new System.Windows.Forms.Button();
+            this.txtRemoteHost = new System.Windows.Forms.TextBox();
             this.numPort = new System.Windows.Forms.NumericUpDown();
             this.lblPortListen = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
@@ -55,8 +57,6 @@
             this.cExpected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cResponseEn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cResponse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtRemoteHost = new System.Windows.Forms.TextBox();
-            this.btnConnectRemote = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeout)).BeginInit();
             this.grpAutoResponse.SuspendLayout();
             this.grpSend.SuspendLayout();
@@ -292,7 +292,26 @@
             this.grpComs.Size = new System.Drawing.Size(665, 64);
             this.grpComs.TabIndex = 0;
             this.grpComs.TabStop = false;
-            this.grpComs.Text = "Serial Ports";
+            this.grpComs.Text = "TCP";
+            // 
+            // btnConnectRemote
+            // 
+            this.btnConnectRemote.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnConnectRemote.Location = new System.Drawing.Point(422, 22);
+            this.btnConnectRemote.Name = "btnConnectRemote";
+            this.btnConnectRemote.Size = new System.Drawing.Size(97, 23);
+            this.btnConnectRemote.TabIndex = 8;
+            this.btnConnectRemote.Text = "Connect!";
+            this.btnConnectRemote.UseVisualStyleBackColor = true;
+            this.btnConnectRemote.Click += new System.EventHandler(this.btnConnectRemote_Click);
+            // 
+            // txtRemoteHost
+            // 
+            this.txtRemoteHost.Location = new System.Drawing.Point(316, 24);
+            this.txtRemoteHost.Name = "txtRemoteHost";
+            this.txtRemoteHost.Size = new System.Drawing.Size(100, 20);
+            this.txtRemoteHost.TabIndex = 7;
+            this.txtRemoteHost.Text = "192.168.1.7";
             // 
             // numPort
             // 
@@ -332,9 +351,9 @@
             this.btnConnect.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnConnect.Location = new System.Drawing.Point(164, 21);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(97, 23);
+            this.btnConnect.Size = new System.Drawing.Size(133, 23);
             this.btnConnect.TabIndex = 3;
-            this.btnConnect.Text = "Connect!";
+            this.btnConnect.Text = "Connect as Server!";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
@@ -399,25 +418,6 @@
             this.cResponse.HeaderText = "Response";
             this.cResponse.Name = "cResponse";
             this.cResponse.Width = 200;
-            // 
-            // txtRemoteHost
-            // 
-            this.txtRemoteHost.Location = new System.Drawing.Point(316, 20);
-            this.txtRemoteHost.Name = "txtRemoteHost";
-            this.txtRemoteHost.Size = new System.Drawing.Size(100, 20);
-            this.txtRemoteHost.TabIndex = 7;
-            this.txtRemoteHost.Text = "192.168.1.7";
-            // 
-            // btnConnectRemote
-            // 
-            this.btnConnectRemote.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnConnectRemote.Location = new System.Drawing.Point(422, 20);
-            this.btnConnectRemote.Name = "btnConnectRemote";
-            this.btnConnectRemote.Size = new System.Drawing.Size(97, 23);
-            this.btnConnectRemote.TabIndex = 8;
-            this.btnConnectRemote.Text = "Connect!";
-            this.btnConnectRemote.UseVisualStyleBackColor = true;
-            this.btnConnectRemote.Click += new System.EventHandler(this.btnConnectRemote_Click);
             // 
             // frmTCPTerminal
             // 

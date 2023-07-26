@@ -29,7 +29,7 @@ namespace SilvaTCPTerminal
             {
                 m_server.StopServer();
                 m_server = null;
-                btnConnect.Text = "Connect!";
+                btnConnect.Text = "Connect as Server!";
                 EnableConnectionGUI(true);
             }
             else
